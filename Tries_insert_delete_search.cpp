@@ -15,7 +15,7 @@ class TrieNode{
     
     TrieNode * Search(char a)
     {
-        cout << a << endl;
+        // cout << a << endl;
         return children[a-'a']; 
     }
     
@@ -42,15 +42,15 @@ class TrieNode{
             isEndOfNode = false;
             for(int i=0;i<26;i++)
             if(children[i]) return false;
-            
             return true;
         }        
         if(!children[s[ind]-'a']) return false;
 
         bool exists = children[s[ind]-'a'] -> Delete(s,ind+1);
-        if(exists) {children[s[ind]-'a']=NULL;}
         
-        return exists;
+        if(exists) {delete(children[s[ind]-'a']); }
+        
+        return (!isEndOfNode && exists);
     }
 };
 
@@ -87,9 +87,11 @@ int main() {
     {
         insert(keys[i],root);
     }
-    cout << search("l",root);
+    cout << search("lo",root) << endl;
     
-    deleteKey("l",root);
-    cout << search("l",root);
+    deleteKey("lo",root);
+    cout << search("lo",root)<< endl;
+    
+    cout << search("l",root)<< endl;
     return 0;
 }
